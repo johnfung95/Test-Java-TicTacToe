@@ -85,14 +85,7 @@ class Game{
     }
 
     static void AskForInputs(String[] board, String chess, boolean winner) {
-        try{
-            numInput = in.nextInt();
-            if (!(numInput > 0 && numInput <= 9)) {
-                System.out.println("Invalid input, please re-enter integer values (between 1 - 9).");
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input, please re-enter integer values (between 1 - 9).");
-        } 
+        IsInputValid();
         if (winner == false) {
             if (board[numInput - 1].equals(String.valueOf(numInput))) {
                 board[numInput - 1] = chess;
@@ -102,8 +95,19 @@ class Game{
                     turn = "X";
                 }
             } else {
-                System.out.println("Invalid input, slot already taken, please enter another number.");
+                System.out.println("Invalid input, slot already taken, please enter another number.\n");
             }
         }
+    }
+
+    static void IsInputValid() {
+        try{
+            numInput = in.nextInt();
+            if (!(numInput > 0 && numInput <= 9)) {
+                System.out.println("Invalid input, please re-enter integer values (between 1 - 9).");
+            }
+        } catch (InputMismatchException e) {
+            throw new ArithmeticException("Number exceeds 1-9");
+        } 
     }
 }
