@@ -1,7 +1,10 @@
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Game{
+    static boolean winner = false;
+    static boolean draw = false;
     static String turn = "O";
     static Scanner in;
     static int numInput;
@@ -10,15 +13,23 @@ class Game{
         Board myBoard = new Board();
         in = new Scanner(System.in);
 
+        myBoard.printInstructions();
         myBoard.InitEmptyBoard();
         myBoard.printBoard();
         while (checkWinner(myBoard.board)== false) {
             System.out.println("It is " + turn + " 's turn. Please input a number to take the slot.");
             AskForInputs(myBoard.board, turn, false);
             myBoard.printBoard();
+            if (draw == true) {
+                break;
+            }
         }
-        System.out.println(turn + " is the winner!");
-    }
+        if (draw == true) {
+            System.out.println("It is a Draw!");
+        } else {
+            System.out.println(turn + " is the winner!");
+        }
+}
 
     static boolean checkWinner(String[] board) {
         boolean winner = false;
@@ -59,6 +70,15 @@ class Game{
             } else if (line.equals("OOO")) {
                 turn = "O";
                 winner = true;
+            }
+            for (int a = 0; a < 9; a++) {
+                if (Arrays.asList(board).contains(String.valueOf(a+1))) {
+                    break;
+                }
+                else if (a == 8) {
+                    draw = true;
+                    break;
+                }
             }
         }
         return winner;

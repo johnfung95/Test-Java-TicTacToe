@@ -22,4 +22,8 @@ public class Board {
         board[position] = chess;
         printBoard();
     }
+
+    public void printInstructions() {
+        System.out.println("\nHello, This is my first Tic-Tac-Toe, where I took reference with some similar game templates online. \nIt requires 2 players, each has a representing chess piece, 'O' and 'X'. \nEach player will take turn and enter a slot number (1-9) to put your chess into the playboard. \nWhenever a player scores three of his chess in a row, no matter vertically, horizontally and diagonally, the player wins!\n");
+    }
 }
